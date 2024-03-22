@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackcoffers Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'javascript/dashboard.css' %}">
+</head>
+<body>
+    <h1>Blackcoffers Dashboard</h1>
+    
+    <!-- Add filters for end year, topics, sector, region, etc. -->
+    <form action="{% url 'dashboard' %}" method="GET">
+        <div>
+            <label for="end_year">End Year:</label>
+            <input type="text" id="end_year" name="end_year" autocomplete="off"><br><br>
+        </div>
+        
+        <div>
+            <label for="topics">Topics:</label>
+            <input type="text" id="topics" name="topics" autocomplete="off"><br><br>
+        </div>
+        
+        <div>
+            <label for="sector">Sector:</label>
+            <input type="text" id="sector" name="sector" autocomplete="off"><br><br>
+        </div>
+        
+        <div>
+            <label for="region">Region:</label>
+            <input type="text" id="region" name="region" autocomplete="off"><br><br>
+        </div>
+        
+        <div>
+            <label for="pest">PEST:</label>
+            <input type="text" id="pest" name="pest" autocomplete="off"><br><br>
+        </div>
+        
+        <div>
+            <label for="source">Source:</label>
+            <input type="text" id="source" name="source" autocomplete="off"><br><br>
+        </div>
+        
+        <div>
+            <label for="swot">SWOT:</label>
+            <input type="text" id="swot" name="swot" autocomplete="off"><br><br>
+        </div>
+        
+        <div>
+            <label for="country">Country:</label>
+            <input type="text" id="country" name="country" autocomplete="off"><br><br>
+        </div>
+        
+        <div>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" autocomplete="off"><br><br>
+        </div>
+        
+        <!-- Add other filter fields -->
+        <button type="submit">Apply Filters</button>
+    </form>
+    
+    <!-- Display data retrieved from the database -->
+    <div>
+        {% for item in data %}
+            <div>
+                <p>{{ item.intensity }} - {{ item.likelihood }} - {{ item.relevance }} - {{ item.start_year }} - {{ item.country }} - {{ item.topic }} - {{ item.region }} - {{ item.city }}</p>
+            </div>
+        {% empty %}
+            <p></p>
+        {% endfor %}
+    </div>
+    
+    <!-- Add your chart container -->
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- Include Chart.js and your dashboard.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'javascript/dashboard.js' %}"></script>
+    
+</body>
+</html>
